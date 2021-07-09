@@ -40,7 +40,7 @@ const headerAppender = (selector) => {
   //
   const target = document.querySelector(`${selector}`);
 
-  target.appendChild(Header());
+  target.appendChild(Header("Ark Survival Evolved", "March 31, 1995", "98°"));
 
   return target;
 };

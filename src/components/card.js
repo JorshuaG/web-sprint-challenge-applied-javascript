@@ -59,12 +59,23 @@ const cardAppender = (selector) => {
   //
   const target = document.querySelector(`${selector}`);
 
-  axios.get("http://localhost:5000/api/articles").then((res) => {
-    res.data.articles.javascript.forEach((obj) => {
-      const card = Card(obj);
-      target.appendChild(card);
-      return card;
+  axios.get("http://localhost:5000/api/articles").then(({ data }) => {
+    Object.keys(data.articles).map((key) => {
+      data.articles[key].map((a) => {
+        const card = Card(a);
+        target.appendChild(card);
+      });
+      // const card = Card(data.articles[article]);
+      // target.appendChild(card);
+      // return card;
     });
+
+    // .forEach((obj) => {
+    //   articles.data.forEach((element) => {
+    //     const card = Card(element);
+    //     target.appendChild(card);
+    //     return card;
+    //   });
   });
 };
 
