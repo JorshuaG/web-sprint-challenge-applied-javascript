@@ -42,7 +42,7 @@ const Card = (article) => {
   authorDiv.appendChild(authorName);
 
   containerDiv.addEventListener("click", function () {
-    console.log("headline");
+    console.log(article.headline);
   });
 
   return containerDiv;
@@ -59,24 +59,19 @@ const cardAppender = (selector) => {
   //
   const target = document.querySelector(`${selector}`);
 
-  axios.get("http://localhost:5000/api/articles").then(({ data }) => {
-    Object.keys(data.articles).map((key) => {
-      data.articles[key].map((a) => {
-        const card = Card(a);
-        target.appendChild(card);
+  axios
+    .get("http://localhost:5000/api/articles")
+    .then(({ data }) => {
+      Object.keys(data.articles).map((key) => {
+        data.articles[key].map((article) => {
+          const card = Card(article);
+          target.appendChild(card);
+        });
       });
-      // const card = Card(data.articles[article]);
-      // target.appendChild(card);
-      // return card;
+    })
+    .catch((err) => {
+      console.log(err);
     });
-
-    // .forEach((obj) => {
-    //   articles.data.forEach((element) => {
-    //     const card = Card(element);
-    //     target.appendChild(card);
-    //     return card;
-    //   });
-  });
 };
 
 export { Card, cardAppender };
